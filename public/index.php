@@ -26,6 +26,16 @@ $deninhos = [
     7 => 'deninho caipira',
 ];
 
+$imagens = [
+    1 => 'pic.twitter.com/LtyB4Xiebh',
+    2 => 'pic.twitter.com/nBr4suxC1P',
+    3 => 'pic.twitter.com/YmU2Q3BHwM',
+    4 => 'pic.twitter.com/X6KFLlA2d3',
+    5 => 'pic.twitter.com/DWaC7x5XaR',
+    6 => 'pic.twitter.com/Pssh4S50zr',
+    7 => 'pic.twitter.com/QkBO9gmA0r',
+];
+
 $jsonPerguntas = file_get_contents('../perguntas.json');
 $perguntas = json_decode($jsonPerguntas,true);
 
@@ -45,6 +55,13 @@ if (!empty($_SESSION['pergunta'])) {
         $indice = 'Qual Deninho você é?';
         $pergunta['pergunta'] = ucwords($deninhos[$mode]);
         $finalizou = true;
+        $url = urlencode("
+Eu me identifico com o " . ucwords($deninhos[$mode]) . "
+
+Descubra com qual deninho você se identifica:
+Qual é o seu Deninho - https://deninho.pokemaobr.dev - via @pokemaobr ". $imagens[$mode]);
+        $url = "https://twitter.com/intent/tweet?text=" . $url;
+
     } else {
 
         $chave = $_SESSION['pergunta'];
@@ -75,7 +92,18 @@ if (!empty($_SESSION['pergunta'])) {
 	<title>Qual Deninho Você é?</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->
+
+    <?php if ($finalizou) { ?>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="deninho.pokemaobr.dev">
+    <meta name="twitter:title" content="<?= ucwords($deninhos[$mode]) ?>">
+    <meta name="twitter:description" content="Site para você saber qual deninho você mais se identifica">
+    <meta name="twitter:creator" content="pokemaobr">
+    <meta name="twitter:image" content="https://deninho.pokemaobr.dev/images/deninhos/<?= str_replace(' ','-',$deninhos[$mode]) ?>.png">
+    <meta name="twitter:domain" content="pokemaobr.dev">
+    <?php } ?>
+
+    <!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
@@ -133,8 +161,13 @@ if (!empty($_SESSION['pergunta'])) {
                 ?>
                 <?php if ($finalizou) { ?>
                     <img src="images/deninhos/<?= str_replace(' ','-',$deninhos[$mode]) ?>.png" />
+                <a href="<?= $url ?>" id="twitter-share-btt" rel="nofollow" target="_blank" class="twitter-share-button contact2-form-btn" style="text-decoration: none;">
+                    Compartilhar no Twitter
+                </a>
+                    <a href="https://twitch.tv/pokemaobr" id="twitter-share-btt" rel="nofollow" target="_blank" class="twitter-share-button contact2-form-btn" style="text-decoration: none;">
+                        Live do Pokemaobr
+                    </a>
                 <?php } ?>
-
 			</form>
 		</div>
 	</div>
@@ -163,15 +196,15 @@ if (!empty($_SESSION['pergunta'])) {
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L0S5KLL3K3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-	  gtag('config', 'UA-23581568-13');
-	</script>
+        gtag('config', 'G-L0S5KLL3K3');
+    </script>
 
 </body>
 </html>
