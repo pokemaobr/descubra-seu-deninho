@@ -22,8 +22,18 @@ $deninhos = [
     3 => 'deninho ano novo',
     4 => 'deninho carnavalesco',
     5 => 'deninho noel',
-    6 => 'deninho padrao',
+    6 => 'deninho original',
     7 => 'deninho caipira',
+];
+
+$mensagens = [
+    1 => 'Amante da noite, seu lazer é frequentar cemitérios, possui uma seita onde todas as pessoas dão Hello Worlds.',
+    2 => 'Versão raríssima, adora os domingos, pois é o único dia que pode ser encontrado, apenas as pessoas mais preparadas conseguem obter.',
+    3 => 'Adora champagne e explosão de fogos, curte também retrospectivas e especiais. Animação com toda galacta.',
+    4 => 'Ama uma aglomeração, axé, marchinhas e samba-enredos contituem seu repertório, adora fantasias e desfiles.',
+    5 => 'Gosta de se reunir na mesa com sua família, trocar presentes e de chaminés. No jantar um chester bem recheado.',
+    6 => 'Todo dia é dia, humilde, gosta de qualquer pessoa, seu único objetivo é levar alegria a quem encontra.',
+    7 => 'Uma boa moda de viola e forró para dançar quadrilha é o que curte. Paçoca, quentão e vinho quente está sempre ao seu redor. Adora os meses de junho e julho.',
 ];
 
 $imagens = [
@@ -128,6 +138,9 @@ Qual é o seu Deninho - https://deninho.pokemaobr.dev - via @pokemaobr ". $image
 </head>
 <body>
 
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v9.0&appId=114332105397802&autoLogAppEvents=1" nonce="5hHjuUkJ"></script>
+
 
 	<div class="container-contact100">
 
@@ -143,7 +156,7 @@ Qual é o seu Deninho - https://deninho.pokemaobr.dev - via @pokemaobr ". $image
 
 			</div>
 
-			<form class="contact100-form validate-form" method="POST">
+			<form class="contact100-form validate-form <?php if ($finalizou) { ?> p-3 d-flex justify-content-center <?php } ?>"  method="POST">
 
                 <?php if (!empty($pergunta['respostas'])) {
                     foreach ($pergunta['respostas'] as $indice => $resposta) { ?>
@@ -161,12 +174,21 @@ Qual é o seu Deninho - https://deninho.pokemaobr.dev - via @pokemaobr ". $image
                 ?>
                 <?php if ($finalizou) { ?>
                     <img src="images/deninhos/<?= str_replace(' ','-',$deninhos[$mode]) ?>.png" />
+                    <p><?= $mensagens[$mode] ?></p>
+                    <br />
+
                 <a href="<?= $url ?>" id="twitter-share-btt" rel="nofollow" target="_blank" class="twitter-share-button contact2-form-btn" style="text-decoration: none;">
-                    Compartilhar no Twitter
+                    <i class="fa fa-twitter fa-3x mx-2" title="twitter"></i>
                 </a>
-                    <a href="https://twitch.tv/pokemaobr" id="twitter-share-btt" rel="nofollow" target="_blank" class="twitter-share-button contact2-form-btn" style="text-decoration: none;">
-                        Live do Pokemaobr
+                    &nbsp;
+                <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdeninho.pokemaobr.dev%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">
+                        <i class="fa fa-facebook fa-3x mx-2" title="facebook"></i>
                     </a>
+                    &nbsp;
+                <a href="https://twitch.tv/pokemaobr" id="twitter-share-btt" rel="nofollow" target="_blank" class="twitter-share-button contact2-form-btn" style="text-decoration: none;">
+                        <i class="fa fa-twitch fa-3x mx-2" title="twitch"></i>
+                </a>
+
                 <?php } ?>
 			</form>
 		</div>
